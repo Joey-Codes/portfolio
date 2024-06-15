@@ -1,59 +1,3 @@
-// Vids
-document.addEventListener('DOMContentLoaded', () => {
-    const projectButtons = document.querySelectorAll('.project-button');
-    const videoElement = document.getElementById('project-video');
-    const titleElement = document.getElementById('project-title');
-    const descriptionElement = document.getElementById('project-description');
-    const toolsElement = document.getElementById('project-tools');
-    const screenElement = document.querySelector('.screen');
-
-    projectButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            projectButtons.forEach(btn =>btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            const videoSrc = button.getAttribute('data-video');
-            const title = button.getAttribute('data-title');
-            const description = button.getAttribute('data-description');
-            const tools = button.getAttribute('data-tools');
-
-            videoElement.src = videoSrc;
-            videoElement.loop = true;
-            videoElement.play();
-
-            titleElement.textContent = title;
-            descriptionElement.textContent = description;
-            toolsElement.textContent = tools;
-
-            screenElement.style.display = 'block';
-        });
-    });
-});
-
-
-//Gallery
-document.addEventListener('DOMContentLoaded', function () {
-    const galleryThresh = { threshold: 1 };
-
-    const galleryObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const galleryInput = entry.target.querySelector('input[type="checkbox"]');
-                if (galleryInput) {
-                    setTimeout(() => {
-                        galleryInput.checked = true;
-                    }, 500)
-                }
-            }
-        })  
-    }, galleryThresh);
-
-    const gallerySection = document.querySelector('.gallery');
-    if (gallerySection) {
-        galleryObserver.observe(gallerySection);
-    }
-})
-
 //Backgrounds
 document.addEventListener('DOMContentLoaded', function () {
     const sections = document.querySelectorAll('section');
@@ -149,48 +93,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 // Stars
+let starId = 0;
+
 function createStar() {
     const star = document.createElement('div');
     star.className = 'star';
+    star.id = `star-${starId++}`;
 
-    const size = 30; 
-    const color = '#' + Math.floor(Math.random() * 16777215).toString(16); // Random color
+    const size = Math.random() * 20 + 10; 
+    const color = '#' + Math.floor(Math.random() * 16777215).toString(16); 
 
     star.style.width = size + 'px';
     star.style.height = size + 'px';
     star.style.backgroundColor = color;
 
-    // Randomize starting position
     const startX = Math.random() * window.innerWidth;
-    const startY = Math.random() * window.innerHeight;
+    const startY = Math.random() > 0.5 ? 0 : window.innerHeight;
 
     star.style.left = startX + 'px';
     star.style.top = startY + 'px';
 
-    // Randomize duration for the star to cross the screen
-    const duration = Math.random() * 5 + 3; // Random duration between 3 and 8 seconds
+    const duration = Math.random() * 5 + 3; 
 
-    // Randomize angle for the shooting direction
-    const angle = Math.random() * 360;
+    const endY = startY === 0 ? window.innerHeight : 0;
 
-    // Calculate the ending position based on the angle
-    const endX = startX + Math.cos(angle) * window.innerWidth;
-    const endY = startY + Math.sin(angle) * window.innerHeight;
-
-    // Animate the star
     star.animate([
-        { transform: `translate(${startX}px, ${startY}px)` },
-        { transform: `translate(${endX}px, ${endY}px)` }
+        { transform: `translateY(0px)` },
+        { transform: `translateY(${endY - startY}px)` }
     ], {
-        duration: duration * 1000, // Convert duration to milliseconds
-        iterations: Infinity, // Repeat the animation infinitely
-        easing: 'linear' // Linear motion
+        duration: duration * 1000, 
+        iterations: Infinity,
+        easing: 'linear' 
     });
 
     return star;
 }
 
-// Function to add stars to the container
 function addStars(numStars) {
     const container = document.getElementById('stars-container');
     for (let i = 0; i < numStars; i++) {
@@ -198,8 +136,62 @@ function addStars(numStars) {
     }
 }
 
-// Add stars to the container
-addStars(50); // Add 50 stars initially
+function updateVisibility() {
+    const stars = document.querySelectorAll('.star');
+    const sidebar = document.getElementById('sidebar').getBoundingClientRect();
+    const aboutSection = document.querySelector('.stars-block').getBoundingClientRect();
+
+    stars.forEach(star => {
+        const starRect = star.getBoundingClientRect();
+
+        const isInSidebar = (
+            starRect.right > sidebar.left &&
+            starRect.left < sidebar.right &&
+            starRect.bottom > sidebar.top &&
+            starRect.top < sidebar.bottom
+        );
+
+        const isInAboutSection = (
+            starRect.right > aboutSection.left &&
+            starRect.left < aboutSection.right &&
+            starRect.bottom > aboutSection.top &&
+            starRect.top < aboutSection.bottom
+        );
+
+        if (isInSidebar || isInAboutSection) {
+            star.style.visibility = 'hidden';
+        } else {
+            star.style.visibility = 'visible';
+        }
+    });
+}
+
+addStars(50);
+setInterval(updateVisibility, 100);
+
+
+//Gallery
+document.addEventListener('DOMContentLoaded', function () {
+    const galleryThresh = { threshold: 1 };
+
+    const galleryObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const galleryInput = entry.target.querySelector('input[type="checkbox"]');
+                if (galleryInput) {
+                    setTimeout(() => {
+                        galleryInput.checked = true;
+                    }, 500)
+                }
+            }
+        })  
+    }, galleryThresh);
+
+    const gallerySection = document.querySelector('.gallery');
+    if (gallerySection) {
+        galleryObserver.observe(gallerySection);
+    }
+})
 
 
 
@@ -248,7 +240,39 @@ window.addEventListener("click", function(event) {
     }
 });
 
+// Vids
 document.addEventListener('DOMContentLoaded', () => {
+    const projectButtons = document.querySelectorAll('.project-button');
+    const videoElement = document.getElementById('project-video');
+    const titleElement = document.getElementById('project-title');
+    const descriptionElement = document.getElementById('project-description');
+    const toolsElement = document.getElementById('project-tools');
+    const screenElement = document.querySelector('.screen');
+
+    projectButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            projectButtons.forEach(btn =>btn.classList.remove('active'));
+            button.classList.add('active');
+            
+            const videoSrc = button.getAttribute('data-video');
+            const title = button.getAttribute('data-title');
+            const description = button.getAttribute('data-description');
+            const tools = button.getAttribute('data-tools');
+
+            videoElement.src = videoSrc;
+            videoElement.loop = true;
+            videoElement.play();
+
+            titleElement.textContent = title;
+            descriptionElement.textContent = description;
+            toolsElement.textContent = tools;
+
+            screenElement.style.display = 'block';
+        });
+    });
+});
+
+/* document.addEventListener('DOMContentLoaded', () => {
     const cube = document.querySelector('.cube');
   
     cube.addEventListener('click', () => {
@@ -260,5 +284,5 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   });
-  
+   */
 

@@ -129,7 +129,7 @@ section {
     transition: .5s;
 }
 
-.social-links a { color: #aaaaaa; }
+.social-links a { color: white; }
 .social-links li:nth-child(1):before { background: white; }
 .social-links li:nth-child(2):before { background: #23a6d5; }
 .social-links li:nth-child(3):before { background: #ff006f;}
@@ -468,8 +468,116 @@ section {
 
 .svg0 {
     padding-top: 1.1rem;
-    color: #0e6130;
+    height: 2.7rem;
+    width: 2.7rem;
 }
+
+.svg1 {
+    padding-top: 1.1rem;
+    height: 2.3rem;
+    width: 2.3rem;
+}
+
+
+@media screen and (max-width: 450px) {
+    html { font-size: 3vw; }
+
+    #sidebar {
+        position: fixed;
+        transform: none;
+        top: 0;
+        left: 0;
+        border: none;
+        border-radius: 0;
+      }
+    
+    #sidebar ul {
+        display: flex;
+        justify-content: flex-start; 
+    }
+    
+    #sidebar li {
+        margin: 0;
+        padding: 0 0.8rem; 
+    }
+
+    #about, #experience, #projects, #skills {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    #about { flex-wrap: wrap; }
+
+    .about-title { font-size: 2.7rem; }
+    
+    .about-description {
+        width: 100%; 
+        box-sizing: border-box; 
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .social-links { padding: 0; }
+
+    .gallery > input:checked ~ img:nth-of-type(1) {
+        transform: translate(-8rem, 7.8rem) scale(2.5); 
+    }
+    
+    .gallery > input:checked ~ img:nth-of-type(2) {
+        transform: translate(8rem, 7.8rem) scale(2.5);
+    }
+    
+    .gallery > input:checked ~ img:nth-of-type(3) {
+        transform: translate(-8rem, 20rem) scale(2.5);
+    }
+    
+    .gallery > input:checked ~ img:nth-of-type(4) {
+        transform: translate(8rem, 20rem) scale(2.5);
+    }
+
+    .modal-content { width: 27rem; }
+
+    .project-button {
+        font-size: 1rem;
+        padding: 0.3rem 0.5rem;
+    }
+
+    .laptop {
+        position: relative;
+        width: 30rem;
+        height: 20rem;
+    }
+
+    .skills-icon li, .skills-icon li i {
+        font-size: 1.5rem;
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    
+    .skills-icon li { margin: 0 0.3rem; }
+
+    .skills-icon li i { padding-top: 0.5rem; }
+
+    .svg0 {
+        padding-top: 0.7rem;
+        height: 1.4rem;
+        width: 1.4rem;
+    }
+    
+    .svg1 {
+        padding-top: 0.7rem;
+        height: 1.2rem;
+        width: 1.2rem;
+    }
+
+    .social-links li:nth-child(1) a { color: white; }
+    .social-links li:nth-child(2) a { color: #23a6d5; }
+    .social-links li:nth-child(3) a { color: #ff006f; }
+    .social-links li:nth-child(4) a { color: yellow; }
+    .social-links li:nth-child(5) a { color: #0fffc1; }
+}
+
+
   
 /* .cube {
     position: relative;
