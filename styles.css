@@ -489,6 +489,7 @@ section {
         left: 0;
         border: none;
         border-radius: 0;
+        z-index: 2;
       }
     
     #sidebar ul {
@@ -508,9 +509,10 @@ section {
 
     #about { flex-wrap: wrap; }
 
-    .about-title { font-size: 2.7rem; }
+    .about-title { font-size: 2.5rem; }
     
     .about-description {
+        font-size: 1.65rem;
         width: 100%; 
         box-sizing: border-box; 
         padding-left: 5%;
@@ -518,6 +520,16 @@ section {
     }
 
     .social-links { padding: 0; }
+
+    .experience-description li { 
+        font-size: 1.3rem;
+        padding-top: 10px;
+    }
+
+    .gallery input { 
+        height: 4rem;
+        width: 4rem;
+    }
 
     .gallery > input:checked ~ img:nth-of-type(1) {
         transform: translate(-8rem, 7.8rem) scale(2.5); 
@@ -540,6 +552,12 @@ section {
     .project-button {
         font-size: 1rem;
         padding: 0.3rem 0.5rem;
+    }
+
+    #project-title { font-size: 1.8rem;}
+
+    #project-description, #project-tools { 
+        font-size: 1.3rem;
     }
 
     .laptop {

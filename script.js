@@ -246,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoElement = document.getElementById('project-video');
     const titleElement = document.getElementById('project-title');
     const descriptionElement = document.getElementById('project-description');
+    const linkElement = document.getElementById('project-link')
     const toolsElement = document.getElementById('project-tools');
     const screenElement = document.querySelector('.screen');
 
@@ -257,6 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const videoSrc = button.getAttribute('data-video');
             const title = button.getAttribute('data-title');
             const description = button.getAttribute('data-description');
+            const link = button.getAttribute('data-link');
             const tools = button.getAttribute('data-tools');
 
             videoElement.src = videoSrc;
@@ -265,6 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             titleElement.textContent = title;
             descriptionElement.textContent = description;
+            linkElement.setAttribute('href', link);
             toolsElement.textContent = tools;
 
             screenElement.style.display = 'block';
