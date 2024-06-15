@@ -521,8 +521,10 @@ section {
 
     .social-links { padding: 0; }
 
+    #experience { height: 120vh; }
+
     .experience-description li { 
-        font-size: 1.3rem;
+        font-size: 1.1rem;
         padding-top: 10px;
     }
 
@@ -550,6 +552,7 @@ section {
     .modal-content { width: 27rem; }
 
     .project-button {
+        color: black;
         font-size: 1rem;
         padding: 0.3rem 0.5rem;
     }
@@ -557,7 +560,11 @@ section {
     #project-title { font-size: 1.8rem;}
 
     #project-description, #project-tools { 
-        font-size: 1.3rem;
+        font-size: 1.4rem;
+    }
+
+    .projects-description {
+        width: 95%;
     }
 
     .laptop {

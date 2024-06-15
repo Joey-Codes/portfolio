@@ -100,7 +100,7 @@ function createStar() {
     star.className = 'star';
     star.id = `star-${starId++}`;
 
-    const size = Math.random() * 20 + 10; 
+    const size = Math.random() * 20 + 8; 
     const color = '#' + Math.floor(Math.random() * 16777215).toString(16); 
 
     star.style.width = size + 'px';
