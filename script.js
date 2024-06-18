@@ -94,39 +94,103 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Stars
 let starId = 0;
+let starsExploded = false;
 
 function createStar() {
     const star = document.createElement('div');
     star.className = 'star';
     star.id = `star-${starId++}`;
 
-    const size = Math.random() * 20 + 8; 
-    const color = '#' + Math.floor(Math.random() * 16777215).toString(16); 
+    const remEquivalent = 20 / (1 * window.innerWidth / 100);
+    const size = Math.random() * remEquivalent + 18;
+    const color = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    star.style.backgroundColor = color;
+    star.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        background-color: ${color};
+        position: absolute;
+        left: ${Math.random() * window.innerWidth}px;
+        top: ${Math.random() > 0.5 ? 0 : window.innerHeight}px;
+    `;
 
-    const startX = Math.random() * window.innerWidth;
-    const startY = Math.random() > 0.5 ? 0 : window.innerHeight;
-
-    star.style.left = startX + 'px';
-    star.style.top = startY + 'px';
-
-    const duration = Math.random() * 5 + 3; 
-
-    const endY = startY === 0 ? window.innerHeight : 0;
+    const duration = Math.random() * 5 + 3;
+    const endY = star.style.top === '0px' ? window.innerHeight : 0;
 
     star.animate([
         { transform: `translateY(0px)` },
-        { transform: `translateY(${endY - startY}px)` }
+        { transform: `translateY(${endY - parseFloat(star.style.top)}px)` }
     ], {
-        duration: duration * 1000, 
+        duration: duration * 1000,
         iterations: Infinity,
-        easing: 'linear' 
+        easing: 'linear'
     });
 
     return star;
+}
+
+function explodeStar(star, size, color) {
+    const numParticles = 10;
+    const container = document.getElementById('stars-container');
+    const rect = star.getBoundingClientRect();
+    const starX = rect.left + size / 2;
+    const starY = rect.top + size / 2;
+
+    for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.cssText = `
+            width: 5px;
+            height: 5px;
+            background-color: ${color};
+            position: absolute;
+            left: ${starX}px;
+            top: ${starY}px;
+        `;
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 200;
+
+        const endX = starX + Math.cos(angle) * distance;
+        const endY = starY + Math.sin(angle) * distance;
+
+        particle.animate([
+            { transform: 'translate(0, 0)', opacity: 1 },
+            { transform: `translate(${endX - starX}px, ${endY - starY}px)`, opacity: 0 }
+        ], {
+            duration: 1000,
+            easing: 'ease-out',
+            fill: 'forwards'
+        });
+
+        container.appendChild(particle);
+
+        setTimeout(() => {
+            if (container.contains(particle)) {
+                container.removeChild(particle);
+            }
+        }, 1000);
+    }
+
+    container.removeChild(star);
+}
+
+function explodeAllStars() {
+    const container = document.getElementById('stars-container');
+    const stars = document.querySelectorAll('.star');
+
+    stars.forEach((star, index) => {
+        const size = parseFloat(star.style.width);
+        const color = star.style.backgroundColor;
+
+        setTimeout(() => {
+            explodeStar(star, size, color);
+        }, index * 100);
+    });
+
+    setTimeout(() => {
+        container.innerHTML = '';
+    }, stars.length * 100);
 }
 
 function addStars(numStars) {
@@ -158,16 +222,28 @@ function updateVisibility() {
             starRect.top < aboutSection.bottom
         );
 
-        if (isInSidebar || isInAboutSection) {
-            star.style.visibility = 'hidden';
-        } else {
-            star.style.visibility = 'visible';
-        }
+        star.style.visibility = (isInSidebar || isInAboutSection) ? 'hidden' : 'visible';
     });
 }
 
+document.getElementById('bomb-button').addEventListener('click', () => {
+    const bombIcon = document.getElementById('bomb-button');
+
+    if (starsExploded) {
+        starsExploded = false;
+        addStars(50);
+    } else {
+        starsExploded = true;
+        explodeAllStars();
+    }
+
+    bombIcon.classList.toggle('fa-palette');
+    bombIcon.classList.toggle('fa-bomb');
+});
+
 addStars(50);
 setInterval(updateVisibility, 100);
+
 
 
 //Gallery
@@ -192,7 +268,6 @@ document.addEventListener('DOMContentLoaded', function () {
         galleryObserver.observe(gallerySection);
     }
 })
-
 
 
 //Modal
