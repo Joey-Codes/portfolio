@@ -309,11 +309,12 @@ section {
 }
 
 .close {
+    background-color: white;
     position: absolute;
     top: 0.4rem;
     right: 1rem;
     font-size: 2rem;
-    color: gold;
+    color: black;
     cursor: pointer;
 }
 
@@ -553,7 +554,10 @@ section {
     }
     .modal-content { width: 27rem; }
 
-    .close { color: black; }
+    .close { 
+        background-color: transparent;
+        color: black; 
+    }
 
     .project-button {
         color: black;
