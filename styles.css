@@ -551,8 +551,9 @@ section {
     .gallery > input:checked ~ img:nth-of-type(4) {
         transform: translate(8rem, 20rem) scale(2.5);
     }
-
     .modal-content { width: 27rem; }
+
+    .close { color: black; }
 
     .project-button {
         color: black;
