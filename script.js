@@ -301,6 +301,8 @@ galleryImages.forEach(function(image) {
             customText = `<a href="https://stmichaelvannuys.org" target="_blank"><h2>St Michael Antiochian Orthodox Church</h2></a><p>St. Michael in Van Nuys began serving Orthodox Christians in the San Fernando Valley on January 12, 1969.</p>`;
         } else if (image.src.includes("crossroads_youth.png")) {
             customText = `<a href="https://crossroadsyouth-communitygroup.org" target="_blank"><h2>Crossroads Youth and Community Group</h2></a><p>Crossroads is a nonprofit based in Tuscon, Arizona that provides resources & services that support the transition of youth & those aging out of foster care from homelessness to self-sufficiency and stable independent living.</p>`;
+        } else if (image.src.includes("healing_flower_child.png")) {
+            customText = `<a href="https://healingflowerchild.com" target="_blank"><h2>Healing Flower Child</h2></a><p>Energy healer & yoga teacher, offering yoga classes, chakra attunements, and private lessons.</p>`;
         }
 
         openModal(image.src, customText);

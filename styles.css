@@ -58,7 +58,10 @@ section {
     padding-right: 10%;
 }
 
-#about { color: white; }
+#about { 
+    color: white; 
+    margin-bottom: 12rem;
+}
 
 #stars-container {
     position: absolute;
@@ -194,7 +197,7 @@ section {
 
 .gallery {
     --s: 5rem; 
-    margin-bottom: 10rem;
+    margin-bottom: 35rem;
     display: grid;
     gap: 5px;
     position: relative;
@@ -231,6 +234,7 @@ section {
 .gallery > img:nth-of-type(2) {--i:2;}
 .gallery > img:nth-of-type(3) {--i:3;}
 .gallery > img:nth-of-type(4) {--i:4;}
+.gallery > img:nth-of-type(5) {--i:5;}
   
 .gallery > input:checked ~ img:nth-of-type(1) {
     transform: translate(-23.5rem, 7.8rem) scale(2.5); 
@@ -249,6 +253,11 @@ section {
 
 .gallery > input:checked ~ img:nth-of-type(4) {
     transform: translate(17.63rem, 7.8rem) scale(2.5);
+    border-radius: 0; 
+}
+
+.gallery > input:checked ~ img:nth-of-type(5) {
+    transform: translate(-23.5rem, 18rem) scale(2.5);
     border-radius: 0; 
 }
 
@@ -538,20 +547,26 @@ section {
     }
 
     .gallery > input:checked ~ img:nth-of-type(1) {
-        transform: translate(-8rem, 7.8rem) scale(2.5); 
+        transform: translate(-8rem, 8rem) scale(2.5); 
     }
     
     .gallery > input:checked ~ img:nth-of-type(2) {
-        transform: translate(8rem, 7.8rem) scale(2.5);
+        transform: translate(8rem, 8rem) scale(2.5);
     }
     
     .gallery > input:checked ~ img:nth-of-type(3) {
-        transform: translate(-8rem, 20rem) scale(2.5);
+        transform: translate(-8rem, 19rem) scale(2.5);
     }
     
     .gallery > input:checked ~ img:nth-of-type(4) {
-        transform: translate(8rem, 20rem) scale(2.5);
+        transform: translate(8rem, 19rem) scale(2.5);
     }
+
+    .gallery > input:checked ~ img:nth-of-type(5) {
+        transform: translate(-8rem, 30rem) scale(2.5);
+    }
+
+
     .modal-content { width: 27rem; }
 
     .close { 
