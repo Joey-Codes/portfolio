@@ -6,7 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const starsContainer = document.getElementById('stars-container'); 
     const sidebar = document.getElementById('sidebar'); 
 
-    const observerThresh = { threshold: .5 };
+    const observerThresh = {
+        root: null,
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: 0
+    };
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -296,13 +300,13 @@ galleryImages.forEach(function(image) {
         if (image.src.includes("silva_boxing.png")) {
             customText = `<a href="https://silvaboxing-mma.com" target="_blank"><h2>Silva Boxing MMA</h2></a><p>Silva Boxing & MMA is a boxing & MMA gym located in West Hills, CA. They offer training for everyone at any fitness level, from the average person who wants to get in shape to the amateur/pro MMA fighter who's ready to take their skills to the next level.</p>`;
         } else if (image.src.includes("open_space_stl.png")) {
-            customText = `<a href="https://jaguar-cube-p65r.squarespace.com/" target="_blank"><h2>Open Space STL</h2></a><p>Open Space STL is a nonprofit that works independently and collaboratively to conserve and sustain land, water, and other natural resources for the health and well-being of people throughout the St. Louis region.</p>`;
+            customText = `<a href="https://www.openspacestl.org/" target="_blank"><h2>Open Space STL</h2></a><p>Open Space STL is a nonprofit that works independently and collaboratively to conserve and sustain land, water, and other natural resources for the health and well-being of people throughout the St. Louis region.</p>`;
         } else if (image.src.includes("st_michael.png")) {
             customText = `<a href="https://stmichaelvannuys.org" target="_blank"><h2>St Michael Antiochian Orthodox Church</h2></a><p>St. Michael in Van Nuys began serving Orthodox Christians in the San Fernando Valley on January 12, 1969.</p>`;
         } else if (image.src.includes("crossroads_youth.png")) {
             customText = `<a href="https://crossroadsyouth-communitygroup.org" target="_blank"><h2>Crossroads Youth and Community Group</h2></a><p>Crossroads is a nonprofit based in Tuscon, Arizona that provides resources & services that support the transition of youth & those aging out of foster care from homelessness to self-sufficiency and stable independent living.</p>`;
         } else if (image.src.includes("healing_flower_child.png")) {
-            customText = `<a href="https://healingflowerchild.com" target="_blank"><h2>Healing Flower Child</h2></a><p>Energy healer & yoga teacher, offering yoga classes, chakra attunements, and private lessons.</p>`;
+            customText = `<h2>Healing Flower Child</h2></a><p>Energy healer & yoga teacher, offering yoga classes, chakra attunements, and private lessons.</p>`;
         }
 
         openModal(image.src, customText);
@@ -351,18 +355,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-/* document.addEventListener('DOMContentLoaded', () => {
-    const cube = document.querySelector('.cube');
-  
-    cube.addEventListener('click', () => {
-      cube.classList.add('clicked');
-      
-      // Optionally, remove the class after the animation ends if needed
-      cube.addEventListener('animationend', () => {
-        cube.classList.remove('clicked');
-      });
-    });
-  });
-   */
-

@@ -53,6 +53,10 @@ section {
     padding: 0.8rem;
 }
 
+#experience {
+    height: 150vh;
+}
+
 #about, #experience, #projects, #skills {
     padding-left: 30%;
     padding-right: 10%;
@@ -532,7 +536,7 @@ section {
 
     .social-links { padding: 0; }
 
-    #experience { height: 120vh; }
+    #experience { min-height: fit-content }
 
     #projects { padding-top: 30vh; }
 
@@ -541,31 +545,34 @@ section {
         padding-top: 10px;
     }
 
+    .gallery {
+        margin-bottom: 120vh;
+    }
+
     .gallery input { 
         height: 4rem;
         width: 4rem;
     }
 
     .gallery > input:checked ~ img:nth-of-type(1) {
-        transform: translate(-8rem, 8rem) scale(2.5); 
+        transform: translate(0, 12rem) scale(4);
     }
-    
+
     .gallery > input:checked ~ img:nth-of-type(2) {
-        transform: translate(8rem, 8rem) scale(2.5);
+        transform: translate(0, 28rem) scale(4);
     }
-    
+
     .gallery > input:checked ~ img:nth-of-type(3) {
-        transform: translate(-8rem, 19rem) scale(2.5);
+        transform: translate(0, 44rem) scale(4);
     }
-    
+
     .gallery > input:checked ~ img:nth-of-type(4) {
-        transform: translate(8rem, 19rem) scale(2.5);
+        transform: translate(0, 60rem) scale(4);
     }
 
     .gallery > input:checked ~ img:nth-of-type(5) {
-        transform: translate(-8rem, 30rem) scale(2.5);
+        transform: translate(0, 76rem) scale(4);
     }
-
 
     .modal-content { width: 27rem; }
 
